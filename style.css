@@ -12,6 +12,10 @@ body {
 .login-container,
 .form-container {
     width: 300px;
+    max-height: 90vh;
+    /* limits height to fit small screens */
+    overflow-y: auto;
+    /* enables scrolling within the container */
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -50,6 +54,14 @@ button {
 
 button:hover {
     background-color: #0056b3;
+}
+
+/* For smaller screens */
+@media (max-height: 600px) {
+    .form-container {
+        max-height: 80vh;
+        /* further limits height */
+    }
 }
 
 #error-message {
