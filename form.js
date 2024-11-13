@@ -1,4 +1,4 @@
-document.getElementById("dataForm").addEventListener("submit", function(event) {
+document.getElementById("dataForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
     const formData = {};
@@ -14,9 +14,25 @@ document.getElementById("dataForm").addEventListener("submit", function(event) {
 
     if (allFieldsFilled) {
         const jsonData = JSON.stringify(formData);
-        console.log("Submitted Data:", jsonData);
-        alert("Data submitted successfully!");
-        // 在这里处理保存 jsonData 的逻辑，例如将其发送到服务器或存储到数据库
+
+        try {
+            const response = await fetch("/api/storeData", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: jsonData
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                alert("Data submitted successfully!");
+            } else {
+                alert("Failed to submit data.");
+                console.error(result.error);
+            }
+        } catch (error) {
+            console.error("Error submitting data:", error);
+            alert("An error occurred while submitting data.");
+        }
     } else {
         alert("Please fill in all fields before submitting.");
     }
