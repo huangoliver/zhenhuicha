@@ -6,7 +6,7 @@ export async function onRequestPost(context) {
 
         // 插入数据到 D1 数据库
         const result = await context.env.D1.prepare(
-            `INSERT INTO offers_table (Category, Brand, Bank, APP, Difficulty, Region, Time, Duration, OfferDescription, Link, Condition)
+            `INSERT INTO offers (Category, Brand, Bank, APP, Difficulty, Region, Time, Duration, OfferDescription, Link, Condition)
              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
         ).bind(Category, Brand, Bank, APP, Difficulty, Region, Time, Duration, OfferDescription, Link, Condition).run();
 
