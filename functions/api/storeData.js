@@ -1,13 +1,14 @@
 export async function onRequestPost(context) {
     try {
         const data = await context.request.json();
-        const { id, Category, Brand, Bank, APP, Difficulty, Region, Time, Duration, OfferDescription, Link, Condition } = data;
+        console.log("Received Data:", data);
+        const { Category, Brand, Bank, APP, Difficulty, Region, Time, Duration, OfferDescription, Link, Condition } = data;
 
         // 插入数据到 D1 数据库
         const result = await context.env.D1.prepare(
-            `INSERT INTO offers (id, Category, Brand, Bank, APP, Difficulty, Region, Time, Duration, OfferDescription, Link, Condition)
+            `INSERT INTO offers (Category, Brand, Bank, APP, Difficulty, Region, Time, Duration, OfferDescription, Link, Condition)
              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
-        ).bind(id, Category, Brand, Bank, APP, Difficulty, Region, Time, Duration, OfferDescription, Link, Condition).run();
+        ).bind(Category, Brand, Bank, APP, Difficulty, Region, Time, Duration, OfferDescription, Link, Condition).run();
 
         return new Response(JSON.stringify({ success: true, result }), { status: 200 });
     } catch (error) {
