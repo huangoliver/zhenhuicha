@@ -7,7 +7,7 @@ export async function onRequestPost(context) {
         // 插入数据到 D1 数据库
         const result = await context.env.D1.prepare(
             `INSERT INTO offers (Category, Brand, Bank, APP, Difficulty, Region, Time, Duration, OfferDescription, Link, Condition)
-             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
         ).bind(Category, Brand, Bank, APP, Difficulty, Region, Time, Duration, OfferDescription, Link, Condition).run();
 
         return new Response(JSON.stringify({ success: true, result }), { status: 200 });
