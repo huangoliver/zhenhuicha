@@ -1,6 +1,6 @@
 export async function onRequestPost(context) {
     try {
-        const { username, password } = await request.json();
+        const { username, password } = await context.request.json();
         if (username === context.env.USERNAME && password === context.env.PASSWORD) {
             return new Response(JSON.stringify({ success: true, error: "Login successfully" }), { status: 200 });
         }

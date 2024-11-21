@@ -20,6 +20,6 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         }
     } catch (error) {
         console.error("Failed login system", error);
-        document.getElementById("error-message").textContent = "An error occurred while login!";
+        document.getElementById("error-message").textContent = error;
     }
 });
