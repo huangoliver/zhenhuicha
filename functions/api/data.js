@@ -16,7 +16,7 @@ export async function onRequestGet(context) {
 
     try {
         // 查询数据库
-        const db = context.env.DB; // Cloudflare D1 数据库绑定
+        const db = context.env.D1; // Cloudflare D1 数据库绑定
         const query = `
             SELECT * FROM offers
             WHERE Category LIKE ?
