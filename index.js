@@ -10,12 +10,13 @@ document.getElementById("loginForm").addEventListener("submit", async (event) =>
             body: JSON.stringify({ username, password })
         });
 
-        if (response.ok) {
+        const result = await response.json();
+        if (result.success) {
             // 登录成功，设置会话存储标记
             sessionStorage.setItem("isLoggedIn", "true");
             window.location.href = "form.html";
         } else {
-            document.getElementById("error-message").textContent = "Invalid username or password!";
+            document.getElementById("error-message").textContent = result.error;
         }
     } catch (error) {
         console.error("Failed login system", error);
